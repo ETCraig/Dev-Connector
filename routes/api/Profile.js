@@ -38,7 +38,6 @@ router.post('/', [Authentication, [
         res.status(400).json({ errors: errors.array() });
     }
 
-
     const {
         company,
         website,
@@ -76,7 +75,7 @@ router.post('/', [Authentication, [
     if (instagram) profileFields.social.instagram = instagram;
 
     try {
-        let profile = Profile.findOne({ account: req.account.id });
+        let profile = await Profile.findOne({ account: req.account.id });
 
         //  Update
         if (profile) {
@@ -87,11 +86,10 @@ router.post('/', [Authentication, [
             );
             return res.json(profile);
         }
-
         // Create
         profile = new Profile(profileFields);
         await profile.save();
-        res.json(profile)
+        res.json(profile);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error.');
@@ -99,6 +97,58 @@ router.post('/', [Authentication, [
 
     console.log(profileFields.skills);
     res.send('YO');
+});
+
+
+// @route   GET api/profile
+// @desc    Get all Profiles
+// @access  Public
+router.get('/', async (req, res) => {
+    try {
+        const profiles = await Profile.find().populate('account', ['name', 'avatar']);
+
+        res.json(profiles);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error.');
+    }
+});
+
+// @route   GET api/profile/account/:account_id
+// @desc    Get Profile by Account ID
+// @access  Public
+router.get('/account/:account_id', async (req, res) => {
+    try {
+        const profile = await Profile.findOne({ account: req.params.account_id }).populate('account', ['name', 'avatar']);
+        if (!profile) return res.status(400).json({ msg: 'There is no Profile for This Account.' });
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind == 'ObjectId') {
+            return res.status(400).json({ msg: 'Profile is not Found.' });
+        }
+        res.status(500).send('Server Error.');
+    }
+});
+
+// @route   GET api/profile
+// @desc    Deletes Profile, Account, and Posts
+// @access  Private
+router.delete('/', Authentication, async (req, res) => {
+    try {
+        console.log('YO');
+        console.log('ID', req.account.id)
+        await Profile.findOneAndRemove({ account: req.account.id });
+        await Account.findOneAndRemove({ _id: req.account.id });
+
+        res.json({ msg: 'Account Deleted.' }); 
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind == 'ObjectId') {
+            return res.status(400).json({ msg: 'Profile is not Found.' });
+        }
+        res.status(500).send('Server Error.');
+    }
 });
 
 module.exports = router;
