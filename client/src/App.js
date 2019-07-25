@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import './App.css';
 
-import Aalert from './components/layout/Alert';
+import Alert from './components/layout/Alert';
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Navbar from './components/layout/Navbar';
