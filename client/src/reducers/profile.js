@@ -1,5 +1,6 @@
 import {
     GET_PROFILE,
+    CLEAR_PROFILE,
     PROFILE_ERROR
 } from '../actions/Types';
 
@@ -25,6 +26,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 error: payload,
+                loading: false
+            }
+        case CLEAR_PROFILE:
+            return {
+                ...state,
+                profile: null,
+                repos: [],
                 loading: false
             }
         default:
