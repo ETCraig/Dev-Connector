@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 
-import { getCurrentProfile } from '../../actions/profiles';
+import { getCurrentProfile } from '../../actions/Profile';
 import Spinner from '../layout/Spinner';
 
 import { connect } from 'react-redux';

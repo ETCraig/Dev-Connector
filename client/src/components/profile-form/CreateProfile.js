@@ -1,10 +1,12 @@
 import React, { Fragment, useState } from 'react'
 
+import { createProfile } from '../../actions/Profile';
+
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types'
 
-const CreateProfile = props => {
+const CreateProfile = ({ createProfile, history }) => {
     const [formData, setFormData] = useState({
         company: '',
         website: '',
@@ -41,6 +43,7 @@ const CreateProfile = props => {
 
     const onSubmit = e => {
         e.preventDefault();
+        createProfile(formData, history);
     }
 
     return (
@@ -211,7 +214,7 @@ const CreateProfile = props => {
 }
 
 CreateProfile.propTypes = {
-
+    createProfile: PropTypes.func.isRequired
 }
 
-export default CreateProfile
+export default connect(null, { createProfile })(withRouter(CreateProfile));
