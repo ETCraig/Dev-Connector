@@ -2,10 +2,12 @@ import React, { Fragment, useEffect } from 'react';
 import './App.css';
 
 import Alert from './components/layout/Alert';
+import Dashboard from './components/dashboard/Dashboard';
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import { loadAccount } from './actions/Auth';
 import Navbar from './components/layout/Navbar';
+import PrivateRoute from './components/routing/PrivateRoute';
 import Register from './components/auth/Register';
 import SetAuthToken from './utils/SetAuthToken';
 import store from './store';
@@ -32,6 +34,7 @@ const App = () => {
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
             </Switch>
           </section>
         </Fragment>
