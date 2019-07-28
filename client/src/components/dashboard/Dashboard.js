@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 
+import DashActions from './DashActions';
 import { getCurrentProfile } from '../../actions/Profile';
 import Spinner from '../layout/Spinner';
 
@@ -20,7 +21,7 @@ const Dashboard = ({ getCurrentProfile, auth: { account }, profile: { profile, l
             </p>
             {profile !== null ?
                 <Fragment>
-
+                    <DashActions />
                 </Fragment> :
                 <Fragment>
                     <p>You have not yet set up a profile, please add some info.</p>
