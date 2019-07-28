@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 
 import DashActions from './DashActions';
-import { deleteAccount } from '../../actions/Profile';
 import Education from './Education';
 import Experience from './Experience';
 import { getCurrentProfile, deleteAccount } from '../../actions/Profile';
@@ -14,7 +13,7 @@ import PropTypes from 'prop-types';
 const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { account }, profile: { profile, loading } }) => {
     useEffect(() => {
         getCurrentProfile();
-    }, []);
+    }, [getCurrentProfile]);
 
     return loading && profile === null ? <Spinner /> :
         <Fragment>
