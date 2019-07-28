@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react';
 
 import DashActions from './DashActions';
 import { getCurrentProfile } from '../../actions/Profile';

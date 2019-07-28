@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react';
 
 import { createProfile } from '../../actions/Profile';
 
