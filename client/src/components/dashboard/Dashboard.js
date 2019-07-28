@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
 
 import DashActions from './DashActions';
+import Education from './Education';
+import Experience from './Experience';
 import { getCurrentProfile } from '../../actions/Profile';
 import Spinner from '../layout/Spinner';
 
@@ -22,6 +24,8 @@ const Dashboard = ({ getCurrentProfile, auth: { account }, profile: { profile, l
             {profile !== null ?
                 <Fragment>
                     <DashActions />
+                    <Experience experience={profile.experience} />
+                    <Education education={profile.education} />
                 </Fragment> :
                 <Fragment>
                     <p>You have not yet set up a profile, please add some info.</p>
