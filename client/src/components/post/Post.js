@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 
+import CommentForm from './CommentForm';
 import { getPost } from '../../actions/Post';
 import PostItem from '../posts/PostItem';
 import Spinner from '../layout/Spinner';
@@ -21,6 +22,7 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
                 Back To Posts
             </Link>
             <PostItem post={post} showActions={false} />
+            <CommentForm postId={post._id} />
         </Fragment>
     )
 }
