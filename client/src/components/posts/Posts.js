@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 
 import { getPosts } from '../../actions/Post';
+import PostForm from './PostForm';
 import PostItem from './PostItem';
 import Spinner from '../layout/Spinner';
 
@@ -13,13 +14,14 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
     }, [getPosts]);
 
     return loading ?
-        <Spinner /> 
-    : 
+        <Spinner />
+        :
         <Fragment>
             <h1 className="large text-primary">Posts</h1>
             <p className="lead">
                 <i className="fas fa-user"></i> Welcome to the Community
             </p>
+            <PostForm />
             <div className="posts">
                 {posts.map(post => (
                     <PostItem key={post._id} post={post} />

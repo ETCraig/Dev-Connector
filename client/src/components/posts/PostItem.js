@@ -53,7 +53,6 @@ const PostItem = ({ addLike, deletePost, removeLike, auth, post: { _id, text, na
                     </button>
                 )}
             </Fragment>
-
         </div>
     </div>
 );
