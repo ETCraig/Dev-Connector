@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://ethan_connector:Connector1225@contactkeeper-wfw8w.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "totallyNotTheSecret",
+    "githubClientId": "00b304f8f1847f0ff24f",
+    "githubSecret": "bb5e6e7e75d0f2e43cb13d231ce3bef96772a85d"
+}
