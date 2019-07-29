@@ -76,7 +76,7 @@ router.get('/:id', Authentication, async (req, res) => {
 // @access  Private
 router.delete('/:id', Authentication, async (req, res) => {
     try {
-        const posts = await Post.findById(req.params.id);
+        const post = await Post.findById(req.params.id);
 
         if (!post) {
             return res.status(404).json({ msg: 'Post Not Found.' });
@@ -194,7 +194,7 @@ router.delete('/comment/:id/:comment_id', Authentication, async (req, res) => {
         if (!comment) {
             return res.status(404).json({ msg: 'Comment Not Found.' });
         }
-
+        
         if (comment.account.toString() !== req.account.id) {
             return res.status(401).json({ msg: 'Account Not Authorized.' });
         }

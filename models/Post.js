@@ -17,7 +17,7 @@ const PostSchema = new mongoose.Schema({
     },
     likes: [
         {
-            user: {
+            account: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'account'
             }
@@ -25,7 +25,7 @@ const PostSchema = new mongoose.Schema({
     ],
     comments: [
         {
-            user: {
+            account: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'account'
             },

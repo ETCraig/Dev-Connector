@@ -3,6 +3,7 @@ const Account = require('../../models/Account');
 const Authentication = require('../../middleware/Authentication');
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
+const config = require('config');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
@@ -49,7 +50,6 @@ router.post('/', [
                 id: account.id
             }
         }
-
         jwt.sign(
             payload,
             config.get('jwtSecret'),
@@ -60,6 +60,7 @@ router.post('/', [
             }
         );
     } catch (err) {
+        console.error(err)
         res.status(500).send('Server Error');
     }
 });

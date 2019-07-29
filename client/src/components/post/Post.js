@@ -13,8 +13,8 @@ import PropTypes from 'prop-types';
 const Post = ({ getPost, post: { post, loading }, match }) => {
     useEffect(() => {
         getPost(match.params.id)
-    }, [getPost]);
-
+    }, [getPost, match.params.id]);
+    console.log(post)
     return loading || post === null ? (
         <Spinner />
     ) : (

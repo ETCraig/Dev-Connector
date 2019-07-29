@@ -16,6 +16,7 @@ const Profile = ({ getProfileById, match, profile: { profile, loading }, auth })
     useEffect(() => {
         getProfileById(match.params.id);
     }, [getProfileById, match.params.id]);
+    console.log(profile)
     return (
         <Fragment>
             {profile === null || loading ? <Spinner /> :

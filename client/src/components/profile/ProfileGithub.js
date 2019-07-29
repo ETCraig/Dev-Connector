@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 const ProfileGithub = ({ username, getRepos, repos }) => {
     useEffect(() => {
         getRepos(username);
-    }, [getRepos(username)]);
+    }, [getRepos, username]);
 
     return (
         <div className='profile-github'>

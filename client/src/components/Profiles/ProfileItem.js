@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const ProfileItem = ({ profile: {
     account: {
-        id, name, avatar
+        _id, name, avatar
     },
     status,
     company,
@@ -14,12 +14,12 @@ const ProfileItem = ({ profile: {
 } }) => {
     return (
         <div className="profile bg-light">
-            <img className="round-img" src={avatar} />
+            <img className="round-img" src={avatar} alt='Account Avatar' />
             <div>
                 <h2>{name}</h2>
                 <p>{status} {company && <span> at {company}</span>}</p>
                 <p className="my-1">{location && <span>{location}</span>}</p>
-                <Link to={`/profile/${id}`} className="btn btn-primary">View Profile</Link>
+                <Link to={`/profile/${_id}`} className="btn btn-primary">View Profile</Link>
             </div>
             <ul>
                 {skills.slice(0, 4).map((skill, index) => (
