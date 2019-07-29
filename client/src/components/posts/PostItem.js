@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
-const PostItem = ({ addLike, deletePost, removeLike, auth, post: { _id, text, name, avatar, account, likes, comments, date } }) => (
+const PostItem = ({ addLike, deletePost, removeLike, showActions, auth, post: { _id, text, name, avatar, account, likes, comments, date } }) => (
     <div className='post bg-white p-1 my-1'>
         <div>
             <Link to={`/profile/${account}`}>
@@ -20,42 +20,47 @@ const PostItem = ({ addLike, deletePost, removeLike, auth, post: { _id, text, na
             <p className='post-date'>
                 Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
             </p>
-
-            <Fragment>
-                <button
-                    onClick={() => addLike(_id)}
-                    type='button'
-                    className='btn btn-light'
-                >
-                    <i className='fas fa-thumbs-up' />{' '}
-                    <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
-                </button>
-                <button
-                    onClick={() => removeLike(_id)}
-                    type='button'
-                    className='btn btn-light'
-                >
-                    <i className='fas fa-thumbs-down' />
-                </button>
-                <Link to={`/posts/${_id}`} className='btn btn-primary'>
-                    Discussion{' '}
-                    {comments.length > 0 && (
-                        <span className='comment-count'>{comments.length}</span>
-                    )}
-                </Link>
-                {!auth.loading && account === auth.account._id && (
+            {showActions &&
+                <Fragment>
                     <button
-                        onClick={() => deletePost(_id)}
+                        onClick={() => addLike(_id)}
                         type='button'
-                        className='btn btn-danger'
+                        className='btn btn-light'
                     >
-                        <i className='fas fa-times' />
+                        <i className='fas fa-thumbs-up' />{' '}
+                        <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
                     </button>
-                )}
-            </Fragment>
+                    <button
+                        onClick={() => removeLike(_id)}
+                        type='button'
+                        className='btn btn-light'
+                    >
+                        <i className='fas fa-thumbs-down' />
+                    </button>
+                    <Link to={`/post/${_id}`} className='btn btn-primary'>
+                        Discussion{' '}
+                        {comments.length > 0 && (
+                            <span className='comment-count'>{comments.length}</span>
+                        )}
+                    </Link>
+                    {!auth.loading && account === auth.account._id && (
+                        <button
+                            onClick={() => deletePost(_id)}
+                            type='button'
+                            className='btn btn-danger'
+                        >
+                            <i className='fas fa-times' />
+                        </button>
+                    )}
+                </Fragment>
+            }
         </div>
     </div>
 );
+
+PostItem.defaultProps = {
+    showActions: true
+}
 
 PostItem.propTypes = {
     post: PropTypes.object.isRequired,
